@@ -1,5 +1,5 @@
 // ── Config ──────────────────────────────────────────────────────────────────
-const API_BASE = 'http://localhost:5000'; // Change this to your deployed backend URL
+const API_BASE = 'https://premammail.onrender.com'; // Change this to your deployed backend URL
 
 // ── DOM refs ────────────────────────────────────────────────────────────────
 const video         = document.getElementById('envelope-video');
