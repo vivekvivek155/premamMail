@@ -78,6 +78,81 @@
             color: #4CAF50;
             word-break: break-all;
         }
+
+        /* ── Mobile Responsive ── */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                height: auto;
+                min-height: 100vh;
+            }
+            .form-container {
+                padding: 24px;
+                max-width: 100%;
+                border-radius: 8px;
+            }
+            h2 {
+                font-size: 1.3rem;
+                margin-bottom: 16px;
+            }
+            .input-group {
+                margin-bottom: 12px;
+            }
+            label {
+                font-size: 13px;
+                margin-bottom: 4px;
+            }
+            input, textarea {
+                padding: 10px;
+                font-size: 16px;
+            }
+            textarea {
+                height: 80px;
+            }
+            .btn {
+                padding: 12px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+            .form-container {
+                padding: 16px;
+                border-radius: 6px;
+            }
+            h2 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+            .input-group {
+                margin-bottom: 10px;
+            }
+            label {
+                font-size: 12px;
+                margin-bottom: 3px;
+            }
+            input, textarea {
+                padding: 8px;
+                font-size: 16px;
+                border-radius: 4px;
+            }
+            textarea {
+                height: 70px;
+            }
+            .btn {
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+            #result-box {
+                margin-top: 15px;
+                padding: 12px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 <body>

@@ -253,3 +253,162 @@ body {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
 }
+
+/* ── Mobile & Tablet Responsive ── */
+
+/* Tablets (max-width: 768px) */
+@media (max-width: 768px) {
+    .reveal-card {
+        width: 90vw;
+        max-width: 500px;
+        padding: 28px 24px 24px;
+        top: 45%;
+        transform: translate(-50%, -50%);
+    }
+
+    .wax-seal {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+
+    .reveal-card h2 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+
+    #actual-message {
+        font-size: 1rem;
+        padding: 16px;
+        border-radius: 14px;
+        line-height: 1.7;
+        margin-top: 8px;
+    }
+
+    .btn-icon {
+        font-size: 18px;
+    }
+
+    .btn-label {
+        font-size: 0.9rem;
+    }
+
+    .btn-sub {
+        font-size: 0.6rem;
+    }
+}
+
+/* Mobile phones (max-width: 640px) */
+@media (max-width: 640px) {
+    .reveal-card {
+        width: 92vw;
+        max-width: 420px;
+        padding: 24px 20px 20px;
+        top: 40%;
+        transform: translate(-50%, -50%);
+    }
+
+    .wax-seal {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+        margin-bottom: 14px;
+    }
+
+    .reveal-card h2 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    #actual-message {
+        font-size: 0.95rem;
+        padding: 14px;
+        border-radius: 12px;
+        line-height: 1.65;
+        margin-top: 6px;
+    }
+
+    .btn-icon {
+        font-size: 16px;
+        margin-bottom: 1px;
+    }
+
+    .btn-label {
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
+    }
+
+    .btn-sub {
+        font-size: 0.55rem;
+        letter-spacing: 0.04em;
+    }
+
+    .button-group {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+}
+
+/* Small phones (max-width: 480px) */
+@media (max-width: 480px) {
+    .reveal-card {
+        width: 95vw;
+        max-width: 360px;
+        padding: 20px 16px 16px;
+        top: 35%;
+        transform: translate(-50%, -50%);
+    }
+
+    .wax-seal {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+        margin-bottom: 12px;
+        border: 1.5px solid var(--gold);
+    }
+
+    .reveal-card h2 {
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+        letter-spacing: 0.02em;
+    }
+
+    #actual-message {
+        font-size: 0.9rem;
+        padding: 12px;
+        border-radius: 10px;
+        line-height: 1.6;
+        margin-top: 4px;
+        border-width: 0.5px;
+    }
+
+    #error-text {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 14px 10px 18px;
+        gap: 1px;
+    }
+
+    .btn-icon {
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    .btn-label {
+        font-size: 0.75rem;
+        letter-spacing: 0.04em;
+    }
+
+    .btn-sub {
+        font-size: 0.5rem;
+        letter-spacing: 0.02em;
+        margin-top: 1px;
+    }
+
+    .reveal-card p {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+}
