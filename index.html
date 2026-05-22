@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You've Got Mail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+    <!-- Full-screen background video -->
+    <video
+        id="envelope-video"
+        src="idle.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+    ></video>
+ 
+    <!-- Loading state -->
+    <div id="loading-screen" class="reveal-card">
+        <div class="wax-seal spinner-seal">✉</div>
+        <h2>Loading...</h2>
+        <p>Fetching your letter</p>
+    </div>
+ 
+    <!-- Error state -->
+    <div id="error-screen" class="reveal-card torn-card hidden">
+        <div class="wax-seal torn-seal">!</div>
+        <h2>Something went wrong</h2>
+        <p id="error-text">An unknown error occurred.</p>
+    </div>
+ 
+    <!-- Revealed letter (shown after open video ends) -->
+    <div id="letter-content" class="reveal-card hidden">
+        <div class="wax-seal">✉</div>
+        <h2>Your Love Note</h2>
+        <p id="actual-message"></p>
+    </div>
+ 
+    <!-- Torn state (shown after tear video ends OR letter was already torn) -->
+    <div id="torn-message" class="reveal-card torn-card hidden">
+        <div class="wax-seal torn-seal">✕</div>
+        <h2>Destroyed</h2>
+        <p>This letter has been torn to pieces and cannot be recovered.</p>
+    </div>
+ 
+    <!-- Buttons float at the bottom over the video -->
+    <div class="button-group" id="action-buttons">
+        <button id="open-btn" class="btn btn-open">
+            <span class="btn-icon">⊙</span>
+            <span class="btn-label">Open</span>
+            <span class="btn-sub">Reveal the letter</span>
+        </button>
+        <div class="btn-divider"></div>
+        <button id="tear-btn" class="btn btn-tear">
+            <span class="btn-icon">✕</span>
+            <span class="btn-label">Tear</span>
+            <span class="btn-sub">Destroy forever</span>
+        </button>
+    </div>
+ 
+    <script src="script.js"></script>
+</body>
+</html>

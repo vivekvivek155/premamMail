@@ -1,0 +1,255 @@
+/* ── Reset & base ── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+:root {
+    --gold:        #c9a84c;
+    --gold-light:  #e8c97a;
+    --gold-dark:   #8a6820;
+    --open-green:  #2d6a4f;
+    --open-glow:   #52b788;
+    --tear-red:    #7b1d1d;
+    --tear-glow:   #e63946;
+    --bg:          #0f0d0b;
+    --surface:     #1c1814;
+    --text:        #f0e6d3;
+    --text-muted:  #8a7d6b;
+}
+ 
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+ 
+/* ── Full-screen video ── */
+#envelope-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    z-index: 0;
+}
+ 
+/* ── Buttons float at the bottom over the video ── */
+.button-group {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    align-items: stretch;
+    background: rgba(12, 9, 7, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(201,168,76,0.22);
+}
+ 
+.btn-divider {
+    width: 1px;
+    background: rgba(201,168,76,0.18);
+    flex-shrink: 0;
+}
+ 
+/* ── Base button ── */
+.btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 16px 12px 22px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s ease;
+}
+ 
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+ 
+.btn:active {
+    transform: scale(0.98);
+}
+ 
+/* Open button */
+.btn-open::after {
+    background: radial-gradient(ellipse at center bottom, rgba(82,183,136,0.22) 0%, transparent 70%);
+}
+.btn-open:hover::after,
+.btn-open:focus-visible::after { opacity: 1; }
+.btn-open .btn-icon  { color: var(--open-glow); text-shadow: 0 0 12px rgba(82,183,136,0.8); }
+.btn-open .btn-label { color: var(--open-glow); }
+.btn-open .btn-sub   { color: rgba(82,183,136,0.5); }
+ 
+/* Tear button */
+.btn-tear::after {
+    background: radial-gradient(ellipse at center bottom, rgba(230,57,70,0.22) 0%, transparent 70%);
+}
+.btn-tear:hover::after,
+.btn-tear:focus-visible::after { opacity: 1; }
+.btn-tear .btn-icon  { color: var(--tear-glow); text-shadow: 0 0 12px rgba(230,57,70,0.8); }
+.btn-tear .btn-label { color: var(--tear-glow); }
+.btn-tear .btn-sub   { color: rgba(230,57,70,0.5); }
+ 
+/* Button text layers */
+.btn-icon {
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+ 
+.btn-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+}
+ 
+.btn-sub {
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-top: 2px;
+}
+ 
+/* ── Reveal cards (letter / torn) ── */
+.reveal-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    text-align: center;
+    padding: 40px 36px 36px;
+    background: rgba(28, 16, 24, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 168, 76, 0.28);
+    border-radius: 4px;
+    max-width: 88vw;
+    width: 380px;
+    z-index: 20;
+    animation: cardReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#letter-content {
+    border-color: rgba(233, 57, 128, 0.5);
+    background: rgba(30, 9, 30, 0.95);
+}
+
+#letter-content h2 {
+    font-size: 1rem;
+    color: #f8c1d7;
+    margin-bottom: 14px;
+}
+
+#actual-message {
+    font-size: 1.08rem;
+    line-height: 1.85;
+    color: #fdf2f8;
+    margin-top: 10px;
+    padding: 20px;
+    border: 1px solid rgba(233, 57, 128, 0.5);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    text-align: left;
+    white-space: pre-line;
+}
+ 
+.reveal-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+    pointer-events: none;
+}
+ 
+@keyframes cardReveal {
+    from { opacity: 0; transform: translate(-50%, -55%) scale(0.96); }
+    to   { opacity: 1; transform: translate(-50%, -60%) scale(1); }
+}
+ 
+.wax-seal {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--gold-dark);
+    border: 2px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 18px rgba(201,168,76,0.3);
+}
+ 
+.torn-seal {
+    background: var(--tear-red);
+    border-color: var(--tear-glow);
+    color: var(--tear-glow);
+    box-shadow: 0 0 18px rgba(230,57,70,0.35);
+}
+ 
+.reveal-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--gold-light);
+    margin-bottom: 14px;
+}
+ 
+.torn-card h2 {
+    color: var(--tear-glow);
+}
+ 
+.reveal-card p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+ 
+/* ── Utility ── */
+.hidden {
+    display: none !important;
+}
+ 
+/* ── Loading spinner ── */
+.spinner-seal {
+    animation: spin 1.8s linear infinite;
+    background: var(--gold-dark);
+    border-color: var(--gold);
+    color: var(--gold-light);
+    box-shadow: 0 0 18px rgba(201,168,76,0.3);
+}
+ 
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}

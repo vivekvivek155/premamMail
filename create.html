@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a Secret Letter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: #2a2a2a;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            box-sizing: border-box; /* Ensures padding doesn't mess up width */
+        }
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            opacity: 0.8;
+        }
+        #result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #1e1e1e;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            text-align: center;
+            display: none; /* Hidden until letter is sent */
+        }
+        #result-box a {
+            color: #4CAF50;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Write a Secret Letter</h2>
+        
+        <form id="letter-form">
+            <div class="input-group">
+                <label for="sender">Your Email:</label>
+                <input type="email" id="sender" required placeholder="you@example.com">
+            </div>
+            
+            <div class="input-group">
+                <label for="receiver">Receiver's Email:</label>
+                <input type="email" id="receiver" required placeholder="friend@example.com">
+            </div>
+            
+            <div class="input-group">
+                <label for="message">Secret Message:</label>
+                <textarea id="message" required placeholder="Type your hidden message here..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn" id="send-btn">Send Letter & Generate Link</button>
+        </form>
+
+        <div id="result-box">
+            <p>Letter created successfully! 🎉</p>
+            <p>An email has been sent. You can also view it here:</p>
+            <a href="#" id="magic-link" target="_blank">Link will appear here</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('letter-form').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Stop the page from refreshing
+
+            const sendBtn = document.getElementById('send-btn');
+            sendBtn.innerText = "Sending...";
+            sendBtn.disabled = true;
+
+            // 1. Gather the data from the form
+            const senderEmail = document.getElementById('sender').value;
+            const receiverEmail = document.getElementById('receiver').value;
+            const message = document.getElementById('message').value;
+            const frontendUrl = window.location.origin && window.location.origin !== 'null'
+                ? window.location.origin
+                : 'http://localhost:5500';
+
+            try {
+                // 2. Send the data to your Node.js backend
+                const response = await fetch('http://localhost:5000/api/letters', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ senderEmail, receiverEmail, message, frontendUrl })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // 3. Show the success box and the magic link
+                    document.getElementById('result-box').style.display = 'block';
+                    
+                    const magicLinkElement = document.getElementById('magic-link');
+                    magicLinkElement.href = data.link;
+                    magicLinkElement.innerText = data.link;
+                    
+                    sendBtn.innerText = "Letter Sent!";
+                } else {
+                    alert("Error: " + data.error);
+                    sendBtn.innerText = "Send Letter & Generate Link";
+                    sendBtn.disabled = false;
+                }
+
+            } catch (error) {
+                console.error("Network Error:", error);
+                alert("Could not connect to the backend server. Is it running?");
+                sendBtn.innerText = "Send Letter & Generate Link";
+                sendBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
