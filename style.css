@@ -18,27 +18,39 @@
     --text:        #f0e6d3;
     --text-muted:  #8a7d6b;
 }
+
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
  
 body {
     background-color: var(--bg);
     color: var(--text);
     font-family: 'Lato', sans-serif;
     height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     position: relative;
+    width: 100%;
 }
- 
+
 /* ── Full-screen video ── */
 #envelope-video {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
+    width: 100%;
     height: 100vh;
+    height: 100dvh;
     object-fit: cover;
     object-position: center;
     display: block;
     z-index: 0;
+    background-color: var(--bg);
+    background-image: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
 }
  
 /* ── Buttons float at the bottom over the video ── */
@@ -151,6 +163,9 @@ body {
     border-radius: 4px;
     max-width: 88vw;
     width: 380px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     z-index: 20;
     animation: cardReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -177,6 +192,9 @@ body {
     background: rgba(255, 255, 255, 0.04);
     text-align: left;
     white-space: pre-line;
+    word-break: break-word;
+    max-height: 60vh;
+    overflow-y: auto;
 }
  
 .reveal-card::before {
@@ -248,11 +266,30 @@ body {
     color: var(--gold-light);
     box-shadow: 0 0 18px rgba(201,168,76,0.3);
 }
+
+#loading-screen {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#loading-screen h2 {
+    font-size: 1.2rem;
+    margin-top: 16px;
+}
+
+#loading-screen p {
+    font-size: 0.9rem;
+    margin-top: 8px;
+    opacity: 0.8;
+}
  
 @keyframes spin {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
 }
+
 
 /* ── Mobile & Tablet Responsive ── */
 
@@ -357,6 +394,7 @@ body {
         padding: 20px 16px 16px;
         top: 35%;
         transform: translate(-50%, -50%);
+        max-height: calc(100vh - 80px);
     }
 
     .wax-seal {
