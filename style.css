@@ -52,6 +52,14 @@ body {
     background-color: var(--bg);
     background-image: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);
 }
+
+@media (max-width: 768px) {
+    #envelope-video {
+        object-fit: contain;
+        object-position: center top;
+        background-color: var(--bg);
+    }
+}
  
 /* ── Buttons float at the bottom over the video ── */
 .button-group {
@@ -392,7 +400,7 @@ body {
         width: 95vw;
         max-width: 360px;
         padding: 20px 16px 16px;
-        top: 35%;
+        top: 50%;
         transform: translate(-50%, -50%);
         max-height: calc(100vh - 80px);
     }
