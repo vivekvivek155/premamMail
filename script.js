@@ -46,9 +46,6 @@ window.addEventListener('DOMContentLoaded', async () => {
             video.muted = true;
             video.play();
 
-            // Show the "Destroyed" message card over the video
-            tornMessage.classList.remove('hidden');
-            return;
         }
 
         // Letter is fine — store message, show buttons
