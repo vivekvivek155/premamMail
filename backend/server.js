@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 const resendApiKey = process.env.RESEND_API_KEY;
-const resendFrom = process.env.RESEND_FROM_EMAIL || 'Secret Letter App <premam@premam.yandu.in>';
+const resendFrom = process.env.RESEND_FROM_EMAIL || 'Premam Mail <premam@premam.yandu.in>';
 const frontendUrl = (process.env.FRONTEND_URL || 'http://localhost:5500').replace(/\/$/, '');
 
 if (!resendApiKey) {
